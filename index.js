@@ -17,10 +17,7 @@ const coerceObject = (obj) => Object.entries(obj)
   }, {});
 
 const coerceValue = (val) => {
-  if (/^(\d+|\d*\.\d+)$/.test(val)) {
-    return parseFloat(val);
-
-  } else if (val === '') {
+  if (val === '') {
     return val;
 
   } else if (val in keywords) {

@@ -37,52 +37,6 @@ describe('Coerce', () => {
     });
   });
 
-  describe('Integars', () => {
-    it('turns string values comprised of integer values to integers', () => {
-      expect(coerce({
-        foo: '23094'
-      })).to.deep.equal({
-        foo: 23094
-      });
-    });
-  });
-
-  describe('Arrays', () => {
-    it('turns array of string values comprised of integer values to an array of integers', () => {
-      expect(coerce({
-        foos: ['1', '2', '3']
-      })).to.deep.equal({
-        foos: [1, 2, 3]
-      });
-    });
-
-    it('turns array of string values comprised of integer values to an array of integers', () => {
-      expect(coerce({
-        foos: [
-          {
-            foo: 'true',
-            boo: '123'
-          },
-          {
-            foo: 'false',
-            boo: '456'
-          }
-        ]
-      })).to.deep.equal({
-        foos: [
-          {
-            foo: true,
-            boo: 123
-          },
-          {
-            foo: false,
-            boo: 456
-          }
-        ]
-      });
-    });
-  });
-
   describe('Params', () => {
     it('runs shallow param through an uppercase formatter', () => {
       expect(coerce({
