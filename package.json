@@ -13,7 +13,7 @@
     "test": "mocha --watch"
   },
   "dependencies": {
-    "dot-prop": "5.1.0"
+    "dot-prop": "5.1.1"
   },
   "devDependencies": {
     "mocha": "4.1.0",
