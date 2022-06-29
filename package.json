@@ -1,6 +1,6 @@
 {
   "name": "@dylan/coerce",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Change values on an object based on keywords or a key map.",
   "license": "MIT",
   "keywords": [
