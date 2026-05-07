@@ -1,6 +1,3 @@
-const dotProp = require('dot-prop');
-const querystring = require('querystring');
-
 const keywords = {
   true: true,
   false: false,
@@ -33,13 +30,21 @@ const coerceValue = (val) => {
   return val;
 }
 
+const get = (obj, path) => path.split('.').reduce((o, k) => o?.[k], obj);
+
+const set = (obj, path, val) => {
+  const keys = path.split('.');
+  const last = keys.pop();
+  keys.reduce((o, k) => o[k] ??= {}, obj)[last] = val;
+};
+
 const coerceParams = (obj, q, map) => {
-  Object.keys(querystring.parse(q)).forEach(param => {
+  for (const param of new URLSearchParams(q).keys()) {
     const format = map[param];
     if (format) {
-      dotProp.set(obj, param, format(dotProp.get(obj, param)));
+      set(obj, param, format(get(obj, param)));
     }
-  });
+  }
   return obj;
 }
 
