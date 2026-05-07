@@ -1,61 +1,40 @@
-const { expect } = require('chai');
+const { describe, it } = require('node:test');
+const assert = require('node:assert/strict');
 const { coerce } = require('./index');
 
 
 describe('Coerce', () => {
   describe('Keywords', () => {
     it('turns \'true\' values to true', () => {
-      expect(coerce({
-        foo: 'true'
-      })).to.deep.equal({
-        foo: true
-      });
+      assert.deepStrictEqual(coerce({ foo: 'true' }), { foo: true });
     });
 
     it('turns \'false\' values to false', () => {
-      expect(coerce({
-        foo: 'false'
-      })).to.deep.equal({
-        foo: false
-      });
+      assert.deepStrictEqual(coerce({ foo: 'false' }), { foo: false });
     });
 
     it('turns \'null\' values to null', () => {
-      expect(coerce({
-        foo: 'null'
-      })).to.deep.equal({
-        foo: null
-      });
+      assert.deepStrictEqual(coerce({ foo: 'null' }), { foo: null });
     });
 
     it('turns \'undefined\' values to undefined', () => {
-      expect(coerce({
-        foo: 'undefined'
-      })).to.deep.equal({
-        foo: undefined
-      });
+      assert.deepStrictEqual(coerce({ foo: 'undefined' }), { foo: undefined });
     });
   });
 
   describe('Params', () => {
     it('runs shallow param through an uppercase formatter', () => {
-      expect(coerce({
-        foo: 'hi'
-      }, { coerceMap: { foo: (val) => val.toUpperCase() }}, 'foo')).to.deep.equal({
-        foo: 'HI'
-      });
+      assert.deepStrictEqual(
+        coerce({ foo: 'hi' }, { coerceMap: { foo: (val) => val.toUpperCase() } }, 'foo'),
+        { foo: 'HI' }
+      );
     });
 
     it('runs deep param through an uppercase formatter', () => {
-      expect(coerce({
-        foo: {
-          boo: 'hi'
-        }
-      }, { coerceMap: { 'foo.boo': (val) => val.toUpperCase() }}, 'foo.boo')).to.deep.equal({
-        foo: {
-          boo: 'HI'
-        }
-      });
+      assert.deepStrictEqual(
+        coerce({ foo: { boo: 'hi' } }, { coerceMap: { 'foo.boo': (val) => val.toUpperCase() } }, 'foo.boo'),
+        { foo: { boo: 'HI' } }
+      );
     });
   });
 });
